@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TS AREA BALI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f1f5f9; font-family: 'Inter', sans-serif; }
+        .glass { background: white; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        input, select, textarea { font-size: 14px !important; }
+        #mainContent { display: none; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div id="loginBox" class="max-w-sm mx-auto mt-20 glass rounded-3xl p-8 text-center">
+        <div class="bg-blue-700 w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
+            <span class="text-white text-2xl">🔒</span>
+        </div>
+        <h2 class="text-xl font-black text-slate-800 mb-2">ACCESS LOCKED</h2>
+        <p class="text-slate-500 text-xs mb-6 font-medium">Masukkan Password TS AREA BALI</p>
+        <input type="password" id="passInput" placeholder="Password KLG..." 
+            class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-200 outline-none text-center mb-4 font-bold tracking-widest focus:border-blue-500 transition-all">
+        <button onclick="checkLogin()" 
+            class="w-full bg-blue-700 text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 shadow-lg active:scale-95 transition-all">
+            Unlock System
+        </button>
+        <p id="errLog" class="text-red-500 text-[10px] mt-4 font-bold uppercase hidden">Password Salah, KLG! Jangan Soktau!</p>
+    </div>
+
+    <div id="mainContent" class="max-w-3xl mx-auto glass rounded-3xl overflow-hidden mb-10">
+        <div class="bg-blue-700 p-6 text-white text-center">
+            <h1 class="text-2xl font-black italic tracking-tighter">TS AREA BALI NI KLGG</h1>
+            <p class="text-[10px] uppercase font-bold text-blue-200 tracking-[0.2em]">Report Daily System</p>
+        </div>
+
+        <div class="m-6 p-4 bg-orange-50 border-l-4 border-orange-500 rounded-r-xl shadow-sm">
+            <h2 class="text-orange-800 font-black text-xs uppercase mb-1 flex items-center">
+                <span class="mr-2">⚠️</span> Perhatikan ini sebelum di isi klg!!!
+            </h2>
+            <p class="text-orange-700 text-[11px] leading-relaxed mb-2">
+                Catat **SEMUA** aktivitas seharian tanpa kecuali! Mulai dari jam masuk kantor (09.30), jam istirahat, sampai jam pulang. Waktu kosong atau jam 'gabut' pun **WAJIB** diisi. Jangan ada waktu yang bolong!
+            </p>
+            <p class="text-orange-900 font-bold text-[11px] italic border-t border-orange-200 pt-2 mt-2">
+                Kalo belum paham tanya lagi klg, jangan diem dan soktau!!!
+            </p>
+        </div>
+
+        <form id="dailyForm" class="p-6 pt-0 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Tanggal</label>
+                    <input type="date" id="tanggal" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700" required>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Jam Start</label>
+                    <input type="time" id="start" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Jam End</label>
+                    <input type="time" id="end" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Nama Site / Pelanggan</label>
+                    <input type="text" id="namaSite" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700" required>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Layanan</label>
+                    <select id="layanan" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
+                        <option value=""> </option>
+                        <option value="B2B">B2B</option>
+                        <option value="Retail">Retail</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Case Klasifikasi</label>
+                    <select id="klasifikasi" onchange="updateSub()" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
+                        <option value="">-- Pilih Klasifikasi --</option>
+                        <option value="Dismantle">Dismantle</option>
+                        <option value="Instalasi">Instalasi</option>
+                        <option value="Maintenance Distribusi">Maintenance Distribusi</option>
+                        <option value="Maintenance Lastmile FO">Maintenance Lastmile FO</option>
+                        <option value="Maintenance Lastmile WE">Maintenance Lastmile WE</option>
+                        <option value="Maintenance Lokalan">Maintenance Lokalan</option>
+                        <option value="Maintenance Perangkat">Maintenance Perangkat</option>
+                        <option value="Migrasi">Migrasi</option>
+                        <option value="Perbantuan">Perbantuan</option>
+                        <option value="Preventive">Preventive</option>
+                        <option value="Relokasi">Relokasi</option>
+                        <option value="Survey">Survey</option>
+                        <option value="Visit">Visit</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Sub Klasifikasi</label>
+                    <select id="subKlasifikasi" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
+                        <option value="">-- Pilih Case Dulu --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Problem</label>
+                    <textarea id="problem" placeholder="Wajib diisi kalau ada kendala" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none h-20 text-slate-700 placeholder:text-slate-400 placeholder:text-[11px]"></textarea>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Action</label>
+                    <textarea id="action" placeholder="lampirkan action sejelas mungkin" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none h-20 text-slate-700 placeholder:text-slate-400 placeholder:text-[11px]"></textarea>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Status</label>
+                    <select id="status" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
+                        <option value="Done">Done</option>
+                        <option value="Pending">Pending</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase">Vendor</label>
+                    <select id="vendor" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
+                        <option value="">-- Pilih Vendor --</option>
+                        <option value="Vendor Bagus">Vendor Bagus</option>
+                        <option value="Vendor Tegar">Vendor Tegar</option>
+                        <option value="Vendor Sjb">Vendor Sjb</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="text-[10px] font-bold text-slate-400 uppercase block mb-2">Personil Lapangan</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="rinov"> <span>Rinov</span></label>
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="rifky"> <span>Rifky</span></label>
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="supandi"> <span>Supandi</span></label>
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="riadi"> <span>Riadi</span></label>
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="zawaid"> <span>Zawaid</span></label>
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="rian"> <span>Rian</span></label>
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="pande"> <span>Pande</span></label>
+                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="dimas"> <span>Dimas</span></label>
+                </div>
+            </div>
+
+            <button type="submit" id="btn" class="w-full bg-blue-700 text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 shadow-lg active:scale-95 transition-all">Kirim Laporan KLGG</button>
+        </form>
+    </div>
+
+    <script>
+        // LOGIN DENGAN PASSWORD BARU
+        function checkLogin() {
+            const pass = document.getElementById('passInput').value;
+            const err = document.getElementById('errLog');
+            
+            if(pass === "tsareabali") { // PASSWORD SUDAH DIRUBAH
+                document.getElementById('loginBox').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            } else {
+                err.classList.remove('hidden');
+            }
+        }
+
+        // --- SCRIPT FORM SEPERTI BIASA ---
+        const dataSub = {
+            "Dismantle": ["Pengecekan Ke Lokasi", "Pengambilan Perangkat"],
+            "Instalasi": ["Access Point", "Add On", "Backbone", "Aktivasi Perangkat", "Segment Patner", "Beli Putus", "Backup Fo", "Backup We", "Mainlink Fo", "Mainlink We", "Netstream"],
+            "Maintenance Distribusi": ["Core Putus Di Jb", "Kelistrikan", "Rabasan - Pohon Tumbang", "Vandalisme", "Tabrak Kendaraan", "Kebakaran", "Problem Odp", "Redaman Tinggi", "Problem Odc"],
+            "Maintenance Lastmile FO": ["Redaman Tinggi", "Problem Roset", "Problem Odp", "Vandalisme", "Tabrak Kendaraan", "Rabasan - Pohon Tumbang", "Kebakaran", "Kelistrikan", "Core Putus Di Otb", "Core Putus Di Odc", "Sc - Sc Putus"],
+            "Maintenance Lastmile WE": ["Adaptor Poe Rusak", "Perangkat Rusak", "Repointing", "RJ-45 Bad", "Kelistrikan", "Link Drop"],
+            "Maintenance Lokalan": ["Lan Putus", "RJ-45 Rusak", "Access Point Bermasalah", "Speedtest Tidak Maksimal", "Blank Spot"],
+            "Maintenance Perangkat": ["Perangkat Aktif Lastmile - Hank", "Perangkat Pasif Lastmile - Hank", "Adaptor Rusak", "Tunning Channel"],
+            "Migrasi": ["Migrasi Lastmile", "Migrasi Layanan"],
+            "Perbantuan": ["Perbantuan Operation"],
+            "Preventive": ["Patroli", "Perbaikan Tiang/Relokasi", "Perapihan Odp", "Pelurusan Core", "Instalasi Odp", "Instalasi Jb+Odp", "Instalasi Odc", "Instalasi Otb", "Otdr Distribusi", "Pengisian Pulsa Listrik", "Pengecekan Pulsa Listrik", "Perbaiki Ac", "Pemasangan Splitter", "Rapat Bersama Intansi", "Penitikan Tiang", "Penurunan Redaman", "Pergantian Perangkat", "Pergantian Splitter", "Perapian Kabel Bersama Pu", "Pengecekan Redaman Odc", "Pengecekan Odp", "Pengecekan Bts/Bsc", "Perapian Panel"],
+            "Relokasi": ["Relokasi Satu Bangunan", "Relokasi Beda Alamat"],
+            "Survey": ["Survey Lastmile", "Survey Lokalan", "Survey Segment", "Survey Jalur"],
+            "Visit": ["Additional Visit", "Kabel Tidak Rapi", "Edukasi", "Reposisi Perangkat"],
+            "Other": ["Briefing", "Istirahat", "Menunggu PIC On Office", "Menunggu PIC On Site", "Menunggu Vendor", "Standby", "Terkendala Cuaca", "Menunggu Material"]
+        };
+
+        const toTitleCase = (str) => {
+            if (!str) return "";
+            return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        };
+
+        function updateSub() {
+            const klas = document.getElementById('klasifikasi').value;
+            const sub = document.getElementById('subKlasifikasi');
+            sub.innerHTML = '<option value="">-- Pilih Sub Klasifikasi --</option>';
+            if(dataSub[klas]) dataSub[klas].forEach(s => sub.innerHTML += `<option value="${s}">${s}</option>`);
+        }
+
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxPWNNrHiElZc2LVaFJkbxjdTT2G1J2XODnTFLj9Blq2i4A3DnbeOqm_6HwiZ0GRapg5Q/exec';
+
+        document.getElementById('dailyForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const b = document.getElementById('btn');
+            b.innerText = "MENGIRIM..."; b.disabled = true;
+
+            const tglInput = document.getElementById('tanggal').value;
+            const [y, m, d] = tglInput.split('-');
+            const tanggalIndo = `${d}-${m}-${y}`;
+
+            const check = (v) => document.querySelector(`input[value="${v}"]`).checked ? 1 : 0;
+            const pTerpilih = Array.from(document.querySelectorAll('input[name="p"]:checked'))
+                .map(c => c.value.charAt(0).toUpperCase() + c.value.slice(1)).join(', ');
+
+            const payload = {
+                tanggal: tanggalIndo,
+                start: document.getElementById('start').value,
+                end: document.getElementById('end').value,
+                namaSite: toTitleCase(document.getElementById('namaSite').value),
+                klasifikasi: document.getElementById('klasifikasi').value,
+                subKlasifikasi: document.getElementById('subKlasifikasi').value,
+                status: document.getElementById('status').value,
+                layanan: document.getElementById('layanan').value,
+                tim: document.getElementById('vendor').value + " (" + pTerpilih + ")",
+                problem: toTitleCase(document.getElementById('problem').value),
+                action: toTitleCase(document.getElementById('action').value),
+                p_rinov: check('rinov'), p_rifky: check('rifky'), p_supandi: check('supandi'), p_riadi: check('riadi'),
+                p_zawaid: check('zawaid'), p_rian: check('rian'), p_pande: check('pande'), p_dimas: check('dimas')
+            };
+
+            try {
+                await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+                alert("LAPORAN TERKIRIM, KLGG!");
+                document.getElementById('dailyForm').reset();
+            } catch (err) { alert("ERROR JARINGAN KLGG!"); }
+            finally { b.innerText = "KIRIM LAPORAN LAGI KLGG"; b.disabled = false; }
+        };
+    </script>
+</body>
+</html>
