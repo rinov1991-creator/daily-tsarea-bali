@@ -99,25 +99,27 @@
                     <div class="relative bg-slate-800/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10">
                         
                         <!-- Date & Time Row -->
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                            <div>
-                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Tanggal</label>
+                        <div class="mb-6">
+                            <div class="mb-4">
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Tanggal <span class="text-red-400">*</span></label>
                                 <input type="date" id="tanggal" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
                             </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam Start</label>
-                                <input type="time" id="start" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam End</label>
-                                <input type="time" id="end" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam Start <span class="text-red-400">*</span></label>
+                                    <input type="time" id="start" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam End <span class="text-red-400">*</span></label>
+                                    <input type="time" id="end" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Site & Layanan Row -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                             <div>
-                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Nama Site / Pelanggan</label>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Nama Site / Pelanggan <span class="text-red-400">*</span></label>
                                 <input type="text" id="namaSite" placeholder="Masukkan nama site..." class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
                             </div>
                             <div>
@@ -133,8 +135,8 @@
                         <!-- Klasifikasi Row -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                             <div>
-                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Case Klasifikasi</label>
-                                <select id="klasifikasi" onchange="updateSub()" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Case Klasifikasi <span class="text-red-400">*</span></label>
+                                <select id="klasifikasi" onchange="updateSub()" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer" required>
                                     <option value="">-- Pilih Klasifikasi --</option>
                                     <option value="Dismantle">Dismantle</option>
                                     <option value="Instalasi">Instalasi</option>
@@ -167,15 +169,15 @@
                                 <textarea id="problem" placeholder="Wajib diisi kalau ada kendala" rows="3" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 resize-none"></textarea>
                             </div>
                             <div>
-                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Action</label>
-                                <textarea id="action" placeholder="Lampirkan action sejelas mungkin" rows="3" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 resize-none"></textarea>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Action <span class="text-red-400">*</span></label>
+                                <textarea id="action" placeholder="Lampirkan action sejelas mungkin" rows="3" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 resize-none" required></textarea>
                             </div>
                         </div>
 
                         <!-- Status & Vendor Row -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                             <div>
-                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Status</label>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Status <span class="text-red-400">*</span></label>
                                 <select id="status" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
                                     <option value="Done">Done</option>
                                     <option value="Pending">Pending</option>
@@ -287,7 +289,7 @@
 
             <!-- Footer -->
             <div class="text-center mt-8 text-white/30 text-xs">
-                <p>© 2024 KLGG Daily Report System - TS Area Bali</p>
+                <p>© 2026 Daily Report System - TS Area Bali</p>
             </div>
         </div>
     </div>
@@ -375,6 +377,21 @@
         // FORM SUBMISSION
         document.getElementById('dailyForm').onsubmit = async (e) => {
             e.preventDefault();
+            
+            // VALIDASI WAJIB
+            const tanggal = document.getElementById('tanggal').value;
+            const start = document.getElementById('start').value;
+            const end = document.getElementById('end').value;
+            const namaSite = document.getElementById('namaSite').value;
+            const klasifikasi = document.getElementById('klasifikasi').value;
+            const action = document.getElementById('action').value;
+            const status = document.getElementById('status').value;
+            
+            if(!tanggal || !start || !end || !namaSite || !klasifikasi || !action || !status) {
+                alert("Liat pake mata beberapa kolom wajib di isi klgg!!!");
+                return;
+            }
+            
             const b = document.getElementById('btn');
             b.innerText = "MENGIRIM..."; 
             b.disabled = true;
