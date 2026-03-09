@@ -99,19 +99,19 @@
                     <div class="relative bg-slate-800/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10">
                         
                         <!-- Date & Time Row -->
-                        <div class="mb-6">
-                            <div class="mb-4">
+                        <div class="mb-6 space-y-4">
+                            <div>
                                 <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Tanggal <span class="text-red-400">*</span></label>
-                                <input type="date" id="tanggal" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
+                                <input type="date" id="tanggal" class="w-full px-3 py-2.5 text-sm bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
                             </div>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam Start <span class="text-red-400">*</span></label>
-                                    <input type="time" id="start" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
+                                    <input type="time" id="start" class="w-full px-3 py-2.5 text-sm bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
                                 </div>
                                 <div>
                                     <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam End <span class="text-red-400">*</span></label>
-                                    <input type="time" id="end" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
+                                    <input type="time" id="end" class="w-full px-3 py-2.5 text-sm bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
                                 </div>
                             </div>
                         </div>
@@ -300,13 +300,13 @@
             "Dismantle": ["Pengecekan Ke Lokasi", "Pengambilan Perangkat"],
             "Instalasi": ["Access Point", "Add On", "Backbone", "Aktivasi Perangkat", "Segment Patner", "Beli Putus", "Backup Fo", "Backup We", "Mainlink Fo", "Mainlink We", "Netstream"],
             "Maintenance Distribusi": ["Core Putus Di JB", "Kelistrikan", "Rabasan - Pohon Tumbang", "Vandalisme", "Tabrak Kendaraan", "Kebakaran", "Problem ODP", "Redaman Tinggi", "Problem ODC"],
-            "Maintenance Lastmile FO": ["Redaman Tinggi", "Problem Roset", "Problem ODP", "Vandalisme", "Tabrak Kendaraan", "Rabasan - Pohon Tumbang", "Kebakaran", "Kelistrikan", "Core Putus Di Otb", "Core Putus Di ODC", "Pigtail Bermasalah"],
+            "Maintenance Lastmile FO": ["Redaman Tinggi", "Problem Roset", "Problem ODP", "Vandalisme", "Tabrak Kendaraan", "Rabasan - Pohon Tumbang", "Kebakaran", "Kelistrikan", "Core Putus Di OTB", "Core Putus Di ODC", "Pigtail Bermasalah"],
             "Maintenance Lastmile WE": ["Adaptor Poe Rusak", "Perangkat Rusak", "Repointing", "RJ-45 Bad", "Kelistrikan", "Link Drop"],
             "Maintenance Lokalan": ["Lan Putus", "RJ-45 Rusak", "Access Point Bermasalah", "Speedtest Tidak Maksimal", "Blank Spot"],
             "Maintenance Perangkat": ["Perangkat Aktif Lastmile - Hank", "Perangkat Pasif Lastmile - Hank", "Adaptor Rusak", "Tunning Channel"],
             "Migrasi": ["Migrasi Lastmile", "Migrasi Layanan"],
             "Perbantuan": ["Perbantuan Operation"],
-            "Preventive": ["Patroli", "Perbaikan Tiang/Relokasi", "Perapihan ODP", "Pelurusan Core", "Instalasi ODP", "Instalasi JB+ODP", "Instalasi ODC", "Instalasi Otb", "Otdr Distribusi", "Pengisian Pulsa Listrik", "Pengecekan Pulsa Listrik", "Perbaiki Ac", "Pemasangan Splitter", "Rapat Bersama Intansi", "Penitikan Tiang", "Penurunan Redaman", "Pergantian Perangkat", "Pergantian Splitter", "Perapian Kabel Bersama Pu", "Pengecekan Redaman ODC", "Pengecekan ODP", "Pengecekan Bts/Bsc", "Perapian Panel"],
+            "Preventive": ["Patroli", "Perbaikan Tiang/Relokasi", "Perapihan ODP", "Pelurusan Core", "Instalasi ODP", "Instalasi JB+ODP", "Instalasi ODC", "Instalasi OTB", "OTDR Distribusi", "Pengisian Pulsa Listrik", "Pengecekan Pulsa Listrik", "Perbaiki AC", "Pemasangan Splitter", "Rapat Bersama Intansi", "Penitikan Tiang", "Penurunan Redaman", "Pergantian Perangkat", "Pergantian Splitter", "Perapian Kabel Bersama PU", "Pengecekan Redaman ODC", "Pengecekan ODP", "Pengecekan BTS/BSC", "Perapian Panel"],
             "Relokasi": ["Relokasi Satu Bangunan", "Relokasi Beda Alamat"],
             "Survey": ["Survey Lastmile", "Survey Lokalan", "Survey Segment", "Survey Jalur"],
             "Visit": ["Additional Visit", "Kabel Tidak Rapi", "Edukasi", "Reposisi Perangkat"],
@@ -453,4 +453,3 @@
     </script>
 </body>
 </html>
-
