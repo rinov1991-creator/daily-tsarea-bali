@@ -3,178 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TS AREA BALI</title>
+    <title>TS AREA BALI - KLGG Daily Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #f1f5f9; font-family: 'Inter', sans-serif; }
-        .glass { background: white; border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-        input, select, textarea { font-size: 14px !important; }
-        #mainContent { display: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        input[type="date"]::-webkit-calendar-picker-indicator,
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+        select option { background: #1e293b; }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 relative overflow-hidden">
+    <!-- Animated Background -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute top-1/2 -left-40 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+        <div class="absolute -bottom-40 right-1/3 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+    <!-- Grid Pattern -->
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
 
-    <div id="loginBox" class="max-w-sm mx-auto mt-20 glass rounded-3xl p-8 text-center">
-        <div class="bg-blue-700 w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
-            <span class="text-white text-2xl">🔒</span>
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div class="w-full max-w-sm group relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
+            <div class="relative bg-slate-800/80 backdrop-blur-xl rounded-3xl p-8 border border-white/10">
+                <!-- Lock Icon -->
+                <div class="flex justify-center mb-6">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center shadow-xl shadow-blue-500/30 animate-bounce" style="animation-duration: 3s;">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                </div>
+                <h2 class="text-2xl font-black text-white text-center mb-2">ACCESS LOCKED</h2>
+                <p class="text-blue-200/60 text-xs text-center mb-8 font-medium tracking-wide">Masukkan Password TS AREA BALI</p>
+                <input type="password" id="passInput" placeholder="Password KLG..." 
+                    class="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-2xl text-white text-center font-bold tracking-widest placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all mb-4"
+                    onkeypress="if(event.key==='Enter') checkLogin()">
+                <button onclick="checkLogin()" 
+                    class="w-full py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-2xl font-black uppercase tracking-widest hover:from-blue-700 hover:to-cyan-700 shadow-xl shadow-blue-500/30 active:scale-95 transition-all">
+                    Unlock System
+                </button>
+                <p id="errLog" class="text-red-400 text-[10px] mt-4 font-bold uppercase text-center animate-pulse hidden">Password Salah, KLG! Jangan Soktau!</p>
+            </div>
         </div>
-        <h2 class="text-xl font-black text-slate-800 mb-2">ACCESS LOCKED</h2>
-        <p class="text-slate-500 text-xs mb-6 font-medium">Masukkan Password TS AREA BALI</p>
-        <input type="password" id="passInput" placeholder="Password KLG..." 
-            class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-200 outline-none text-center mb-4 font-bold tracking-widest focus:border-blue-500 transition-all">
-        <button onclick="checkLogin()" 
-            class="w-full bg-blue-700 text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 shadow-lg active:scale-95 transition-all">
-            Unlock System
-        </button>
-        <p id="errLog" class="text-red-500 text-[10px] mt-4 font-bold uppercase hidden">Password Salah, KLG! Jangan Soktau!</p>
     </div>
 
-    <div id="mainContent" class="max-w-3xl mx-auto glass rounded-3xl overflow-hidden mb-10">
-        <div class="bg-blue-700 p-6 text-white text-center">
-            <h1 class="text-2xl font-black italic tracking-tighter">TS AREA BALI NI KLGG</h1>
-            <p class="text-[10px] uppercase font-bold text-blue-200 tracking-[0.2em]">Report Daily System</p>
+    <!-- MAIN FORM -->
+    <div id="mainContent" class="relative z-10 py-8 px-4 sm:px-6 lg:px-8 hidden">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 shadow-2xl shadow-blue-500/30 mb-6 animate-bounce" style="animation-duration: 3s;">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-black italic text-white mb-2 tracking-tighter">
+                    <span class="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">TS AREA BALI NI KLGG</span>
+                </h1>
+                <p class="text-xs uppercase font-bold text-blue-200/60 tracking-[0.2em]">Report Daily System</p>
+            </div>
+
+            <!-- Warning Section -->
+            <div class="mb-8 relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-500"></div>
+                <div class="relative bg-gradient-to-r from-amber-900/80 to-orange-900/80 backdrop-blur-xl rounded-2xl p-6 border border-amber-500/30">
+                    <div class="flex gap-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-black text-amber-300 mb-2 uppercase">PERHATIKAN INI SEBELUM DI ISI KLG!!!</h3>
+                            <p class="text-amber-100/90 text-xs leading-relaxed mb-3">
+                                Catat <span class="font-bold text-amber-300">SEMUA</span> aktivitas seharian tanpa kecuali! Mulai dari jam masuk kantor (09.30), jam istirahat, sampai jam pulang. Waktu kosong atau jam 'gabut' pun <span class="font-bold text-red-400">WAJIB</span> diisi. Jangan ada waktu yang bolong!
+                            </p>
+                            <p class="text-amber-200/70 text-xs italic border-t border-amber-500/30 pt-3 mt-3">Kalo belum paham tanya lagi klg, jangan diem dan soktau!!!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="dailyForm" class="space-y-6">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl blur opacity-20 group-hover:opacity-30 transition duration-500"></div>
+                    <div class="relative bg-slate-800/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/10">
+                        
+                        <!-- Date & Time Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Tanggal</label>
+                                <input type="date" id="tanggal" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam Start</label>
+                                <input type="time" id="start" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Jam End</label>
+                                <input type="time" id="end" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10">
+                            </div>
+                        </div>
+
+                        <!-- Site & Layanan Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Nama Site / Pelanggan</label>
+                                <input type="text" id="namaSite" placeholder="Masukkan nama site..." class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Layanan</label>
+                                <select id="layanan" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
+                                    <option value=""></option>
+                                    <option value="B2B">B2B</option>
+                                    <option value="Retail">Retail</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Klasifikasi Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Case Klasifikasi</label>
+                                <select id="klasifikasi" onchange="updateSub()" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
+                                    <option value="">-- Pilih Klasifikasi --</option>
+                                    <option value="Dismantle">Dismantle</option>
+                                    <option value="Instalasi">Instalasi</option>
+                                    <option value="Maintenance Distribusi">Maintenance Distribusi</option>
+                                    <option value="Maintenance Lastmile FO">Maintenance Lastmile FO</option>
+                                    <option value="Maintenance Lastmile WE">Maintenance Lastmile WE</option>
+                                    <option value="Maintenance Lokalan">Maintenance Lokalan</option>
+                                    <option value="Maintenance Perangkat">Maintenance Perangkat</option>
+                                    <option value="Migrasi">Migrasi</option>
+                                    <option value="Perbantuan">Perbantuan</option>
+                                    <option value="Preventive">Preventive</option>
+                                    <option value="Relokasi">Relokasi</option>
+                                    <option value="Survey">Survey</option>
+                                    <option value="Visit">Visit</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Sub Klasifikasi</label>
+                                <select id="subKlasifikasi" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
+                                    <option value="">-- Pilih Case Dulu --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Problem & Action Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Problem</label>
+                                <textarea id="problem" placeholder="Wajib diisi kalau ada kendala" rows="3" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 resize-none"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Action</label>
+                                <textarea id="action" placeholder="Lampirkan action sejelas mungkin" rows="3" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 resize-none"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Status & Vendor Row -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Status</label>
+                                <select id="status" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
+                                    <option value="Done">Done</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Vendor</label>
+                                <select id="vendor" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
+                                    <option value="">-- Pilih Vendor --</option>
+                                    <option value="Vendor Bagus">Vendor Bagus</option>
+                                    <option value="Vendor Tegar">Vendor Tegar</option>
+                                    <option value="Vendor SJB">Vendor SJB</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Personil Section -->
+                        <div class="mb-6">
+                            <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-3">Personil Lapangan</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white/5 p-4 rounded-2xl border border-white/10">
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="rinov" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Rinov</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="rifky" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Rifky</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="supandi" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Supandi</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="riadi" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Riadi</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="zawaid" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Zawaid</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="rian" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Rian</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="pande" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Pande</span>
+                                </label>
+                                <label class="flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 checkbox-label">
+                                    <input type="checkbox" name="p" value="dimas" class="hidden checkbox-input">
+                                    <div class="w-5 h-5 rounded-md border-2 border-white/30 flex items-center justify-center transition-all duration-300 checkbox-box">
+                                        <svg class="w-3 h-3 text-white hidden checkbox-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-medium text-white/70 checkbox-text">Dimas</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="btn" class="group relative w-full overflow-hidden">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl blur opacity-60 group-hover:opacity-100 transition duration-300"></div>
+                            <div class="relative px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center gap-3 font-black text-white text-lg uppercase tracking-widest shadow-xl shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all duration-300">
+                                <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                                <span>KIRIM LAPORAN KLGG</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Footer -->
+            <div class="text-center mt-8 text-white/30 text-xs">
+                <p>© 2024 KLGG Daily Report System - TS Area Bali</p>
+            </div>
         </div>
-
-        <div class="m-6 p-4 bg-orange-50 border-l-4 border-orange-500 rounded-r-xl shadow-sm">
-            <h2 class="text-orange-800 font-black text-xs uppercase mb-1 flex items-center">
-                <span class="mr-2">⚠️</span> Perhatikan ini sebelum di isi klg!!!
-            </h2>
-            <p class="text-orange-700 text-[11px] leading-relaxed mb-2">
-                Catat **SEMUA** aktivitas seharian tanpa kecuali! Mulai dari jam masuk kantor (09.30), jam istirahat, sampai jam pulang. Waktu kosong atau jam 'gabut' pun **WAJIB** diisi. Jangan ada waktu yang bolong!
-            </p>
-            <p class="text-orange-900 font-bold text-[11px] italic border-t border-orange-200 pt-2 mt-2">
-                Kalo belum paham tanya lagi klg, jangan diem dan soktau!!!
-            </p>
-        </div>
-
-        <form id="dailyForm" class="p-6 pt-0 space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Tanggal</label>
-                    <input type="date" id="tanggal" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700" required>
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Jam Start</label>
-                    <input type="time" id="start" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Jam End</label>
-                    <input type="time" id="end" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Nama Site / Pelanggan</label>
-                    <input type="text" id="namaSite" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700" required>
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Layanan</label>
-                    <select id="layanan" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
-                        <option value=""> </option>
-                        <option value="B2B">B2B</option>
-                        <option value="Retail">Retail</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Case Klasifikasi</label>
-                    <select id="klasifikasi" onchange="updateSub()" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
-                        <option value="">-- Pilih Klasifikasi --</option>
-                        <option value="Dismantle">Dismantle</option>
-                        <option value="Instalasi">Instalasi</option>
-                        <option value="Maintenance Distribusi">Maintenance Distribusi</option>
-                        <option value="Maintenance Lastmile FO">Maintenance Lastmile FO</option>
-                        <option value="Maintenance Lastmile WE">Maintenance Lastmile WE</option>
-                        <option value="Maintenance Lokalan">Maintenance Lokalan</option>
-                        <option value="Maintenance Perangkat">Maintenance Perangkat</option>
-                        <option value="Migrasi">Migrasi</option>
-                        <option value="Perbantuan">Perbantuan</option>
-                        <option value="Preventive">Preventive</option>
-                        <option value="Relokasi">Relokasi</option>
-                        <option value="Survey">Survey</option>
-                        <option value="Visit">Visit</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Sub Klasifikasi</label>
-                    <select id="subKlasifikasi" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
-                        <option value="">-- Pilih Case Dulu --</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Problem</label>
-                    <textarea id="problem" placeholder="Wajib diisi kalau ada kendala" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none h-20 text-slate-700 placeholder:text-slate-400 placeholder:text-[11px]"></textarea>
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Action</label>
-                    <textarea id="action" placeholder="lampirkan action sejelas mungkin" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none h-20 text-slate-700 placeholder:text-slate-400 placeholder:text-[11px]"></textarea>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Status</label>
-                    <select id="status" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
-                        <option value="Done">Done</option>
-                        <option value="Pending">Pending</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase">Vendor</label>
-                    <select id="vendor" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none text-slate-700">
-                        <option value="">-- Pilih Vendor --</option>
-                        <option value="Vendor Bagus">Vendor Bagus</option>
-                        <option value="Vendor Tegar">Vendor Tegar</option>
-                        <option value="Vendor Sjb">Vendor Sjb</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <label class="text-[10px] font-bold text-slate-400 uppercase block mb-2">Personil Lapangan</label>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200">
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="rinov"> <span>Rinov</span></label>
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="rifky"> <span>Rifky</span></label>
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="supandi"> <span>Supandi</span></label>
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="riadi"> <span>Riadi</span></label>
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="zawaid"> <span>Zawaid</span></label>
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="rian"> <span>Rian</span></label>
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="pande"> <span>Pande</span></label>
-                    <label class="flex items-center space-x-2 text-sm"><input type="checkbox" name="p" value="dimas"> <span>Dimas</span></label>
-                </div>
-            </div>
-
-            <button type="submit" id="btn" class="w-full bg-blue-700 text-white py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-blue-800 shadow-lg active:scale-95 transition-all">Kirim Laporan KLGG</button>
-        </form>
     </div>
 
     <script>
-        // LOGIN DENGAN PASSWORD BARU
-        function checkLogin() {
-            const pass = document.getElementById('passInput').value;
-            const err = document.getElementById('errLog');
-            
-            if(pass === "tsareabali") { // PASSWORD SUDAH DIRUBAH
-                document.getElementById('loginBox').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
-            } else {
-                err.classList.remove('hidden');
-            }
-        }
-
-        // --- SCRIPT FORM SEPERTI BIASA ---
+        // Data Sub Klasifikasi
         const dataSub = {
             "Dismantle": ["Pengecekan Ke Lokasi", "Pengambilan Perangkat"],
             "Instalasi": ["Access Point", "Add On", "Backbone", "Aktivasi Perangkat", "Segment Patner", "Beli Putus", "Backup Fo", "Backup We", "Mainlink Fo", "Mainlink We", "Netstream"],
             "Maintenance Distribusi": ["Core Putus Di Jb", "Kelistrikan", "Rabasan - Pohon Tumbang", "Vandalisme", "Tabrak Kendaraan", "Kebakaran", "Problem Odp", "Redaman Tinggi", "Problem Odc"],
-            "Maintenance Lastmile FO": ["Redaman Tinggi", "Problem Roset", "Problem Odp", "Vandalisme", "Tabrak Kendaraan", "Rabasan - Pohon Tumbang", "Kebakaran", "Kelistrikan", "Core Putus Di Otb", "Core Putus Di Odc", "Sc - Sc Putus"],
+            "Maintenance Lastmile FO": ["Redaman Tinggi", "Problem Roset", "Problem Odp", "Vandalisme", "Tabrak Kendaraan", "Rabasan - Pohon Tumbang", "Kebakaran", "Kelistrikan", "Core Putus Di Otb", "Core Putus Di Odc", "Pigtail Bermasalah"],
             "Maintenance Lastmile WE": ["Adaptor Poe Rusak", "Perangkat Rusak", "Repointing", "RJ-45 Bad", "Kelistrikan", "Link Drop"],
             "Maintenance Lokalan": ["Lan Putus", "RJ-45 Rusak", "Access Point Bermasalah", "Speedtest Tidak Maksimal", "Blank Spot"],
             "Maintenance Perangkat": ["Perangkat Aktif Lastmile - Hank", "Perangkat Pasif Lastmile - Hank", "Adaptor Rusak", "Tunning Channel"],
@@ -187,30 +311,78 @@
             "Other": ["Briefing", "Istirahat", "Menunggu PIC On Office", "Menunggu PIC On Site", "Menunggu Vendor", "Standby", "Terkendala Cuaca", "Menunggu Material"]
         };
 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwubhHQ8zzJmeoAOZXEuBrRfhVY5_DGqLmAmN9KcLyyzYQYGzYpFQoV2bhsdSgQG4wXKw/exec';
+
+        // LOGIN FUNCTION
+        function checkLogin() {
+            const pass = document.getElementById('passInput').value;
+            const err = document.getElementById('errLog');
+            
+            if(pass === "tsareabali") {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('mainContent').classList.remove('hidden');
+            } else {
+                err.classList.remove('hidden');
+            }
+        }
+
+        // UPDATE SUB KLASIFIKASI
+        function updateSub() {
+            const klas = document.getElementById('klasifikasi').value;
+            const sub = document.getElementById('subKlasifikasi');
+            sub.innerHTML = '<option value="">-- Pilih Sub Klasifikasi --</option>';
+            if(dataSub[klas]) {
+                dataSub[klas].forEach(s => {
+                    sub.innerHTML += `<option value="${s}">${s}</option>`;
+                });
+            }
+        }
+
+        // TOOLTIP TITLE CASE
         const toTitleCase = (str) => {
             if (!str) return "";
             return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         };
 
-        function updateSub() {
-            const klas = document.getElementById('klasifikasi').value;
-            const sub = document.getElementById('subKlasifikasi');
-            sub.innerHTML = '<option value="">-- Pilih Sub Klasifikasi --</option>';
-            if(dataSub[klas]) dataSub[klas].forEach(s => sub.innerHTML += `<option value="${s}">${s}</option>`);
-        }
+        // CUSTOM CHECKBOX STYLING
+        document.querySelectorAll('.checkbox-label').forEach(label => {
+            const checkbox = label.querySelector('.checkbox-input');
+            const box = label.querySelector('.checkbox-box');
+            const icon = label.querySelector('.checkbox-icon');
+            const text = label.querySelector('.checkbox-text');
 
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwubhHQ8zzJmeoAOZXEuBrRfhVY5_DGqLmAmN9KcLyyzYQYGzYpFQoV2bhsdSgQG4wXKw/exec';
+            checkbox.addEventListener('change', function() {
+                if(this.checked) {
+                    label.classList.add('bg-gradient-to-r', 'from-blue-600/40', 'to-cyan-600/40', 'border-blue-400/50', 'shadow-lg', 'shadow-blue-500/20');
+                    label.classList.remove('bg-white/5', 'border-white/10');
+                    box.classList.add('bg-blue-500', 'border-blue-500');
+                    box.classList.remove('border-white/30');
+                    icon.classList.remove('hidden');
+                    text.classList.add('text-white');
+                    text.classList.remove('text-white/70');
+                } else {
+                    label.classList.remove('bg-gradient-to-r', 'from-blue-600/40', 'to-cyan-600/40', 'border-blue-400/50', 'shadow-lg', 'shadow-blue-500/20');
+                    label.classList.add('bg-white/5', 'border-white/10');
+                    box.classList.remove('bg-blue-500', 'border-blue-500');
+                    box.classList.add('border-white/30');
+                    icon.classList.add('hidden');
+                    text.classList.remove('text-white');
+                    text.classList.add('text-white/70');
+                }
+            });
+        });
 
+        // FORM SUBMISSION
         document.getElementById('dailyForm').onsubmit = async (e) => {
             e.preventDefault();
             const b = document.getElementById('btn');
-            b.innerText = "MENGIRIM..."; b.disabled = true;
+            b.innerText = "MENGIRIM..."; 
+            b.disabled = true;
 
             const tglInput = document.getElementById('tanggal').value;
             const [y, m, d] = tglInput.split('-');
             const tanggalIndo = `${d}-${m}-${y}`;
 
-            const check = (v) => document.querySelector(`input[value="${v}"]`).checked ? 1 : 0;
             const pTerpilih = Array.from(document.querySelectorAll('input[name="p"]:checked'))
                 .map(c => c.value.charAt(0).toUpperCase() + c.value.slice(1)).join(', ');
 
@@ -226,19 +398,41 @@
                 tim: document.getElementById('vendor').value + " (" + pTerpilih + ")",
                 problem: toTitleCase(document.getElementById('problem').value),
                 action: toTitleCase(document.getElementById('action').value),
-                p_rinov: check('rinov'), p_rifky: check('rifky'), p_supandi: check('supandi'), p_riadi: check('riadi'),
-                p_zawaid: check('zawaid'), p_rian: check('rian'), p_pande: check('pande'), p_dimas: check('dimas')
+                p_rinov: document.querySelector('input[value="rinov"]').checked ? 1 : 0,
+                p_rifky: document.querySelector('input[value="rifky"]').checked ? 1 : 0,
+                p_supandi: document.querySelector('input[value="supandi"]').checked ? 1 : 0,
+                p_riadi: document.querySelector('input[value="riadi"]').checked ? 1 : 0,
+                p_zawaid: document.querySelector('input[value="zawaid"]').checked ? 1 : 0,
+                p_rian: document.querySelector('input[value="rian"]').checked ? 1 : 0,
+                p_pande: document.querySelector('input[value="pande"]').checked ? 1 : 0,
+                p_dimas: document.querySelector('input[value="dimas"]').checked ? 1 : 0
             };
 
             try {
                 await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
                 alert("LAPORAN TERKIRIM, KLGG!");
                 document.getElementById('dailyForm').reset();
-            } catch (err) { alert("ERROR JARINGAN KLGG!"); }
-            finally { b.innerText = "KIRIM LAPORAN LAGI KLGG"; b.disabled = false; }
+                // Reset checkbox styling
+                document.querySelectorAll('.checkbox-label').forEach(label => {
+                    const box = label.querySelector('.checkbox-box');
+                    const icon = label.querySelector('.checkbox-icon');
+                    const text = label.querySelector('.checkbox-text');
+                    label.classList.remove('bg-gradient-to-r', 'from-blue-600/40', 'to-cyan-600/40', 'border-blue-400/50', 'shadow-lg', 'shadow-blue-500/20');
+                    label.classList.add('bg-white/5', 'border-white/10');
+                    box.classList.remove('bg-blue-500', 'border-blue-500');
+                    box.classList.add('border-white/30');
+                    icon.classList.add('hidden');
+                    text.classList.remove('text-white');
+                    text.classList.add('text-white/70');
+                });
+            } catch (err) { 
+                alert("ERROR JARINGAN KLGG!"); 
+            }
+            finally { 
+                b.innerText = "KIRIM LAPORAN KLGG"; 
+                b.disabled = false; 
+            }
         };
     </script>
 </body>
-
 </html>
-
