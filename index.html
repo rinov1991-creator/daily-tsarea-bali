@@ -305,9 +305,9 @@
                             <input type="text" data-field="namaSite" placeholder="Masukkan nama site..." class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10" required>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Layanan</label>
-                            <select data-field="layanan" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer">
-                                ${optionsHtml(CONFIG.layanan, '')}
+                            <label class="block text-[10px] font-bold text-blue-200/60 uppercase mb-2">Layanan <span class="text-red-400">*</span></label>
+                            <select data-field="layanan" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all hover:bg-white/10 cursor-pointer" required>
+                                ${optionsHtml(CONFIG.layanan, '-- Pilih Layanan --')}
                             </select>
                         </div>
                     </div>
@@ -539,6 +539,7 @@
             if (!activity.end) missing.push('Jam End');
             if (!activity.namaSite) missing.push('Nama Site');
             if (!activity.klasifikasi) missing.push('Case Klasifikasi');
+            if (!activity.layanan) missing.push('Layanan');
             if (!activity.action) missing.push('Action');
             if (!activity.status) missing.push('Status');
             if (isMaintenance(activity.klasifikasi) && !activity.noTiket) missing.push('No Tiket (wajib untuk Maintenance)');
